@@ -26,15 +26,28 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        
+
         <!-- H2 Database (In-memory) -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
-     
+
+        <!-- Spring Boot Starter for Apache Tomcat Jasper (for JSP support) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope> <!-- Set provided scope for Tomcat -->
+        </dependency>
+
+        <!-- Spring Boot Starter for JSP -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope> <!-- Set provided scope for Tomcat Jasper -->
+        </dependency>
+
         <!-- TestNG for testing -->
         <dependency>
             <groupId>org.testng</groupId>
@@ -52,5 +65,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

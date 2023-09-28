@@ -1,13 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Banking Application</title>
+    <title>Account List</title>
 </head>
 <body>
-    <h1>Welcome to the Banking Application</h1>
+    <h1>Account List</h1>
     
-    <h2>Account List</h2>
     <table border="1">
         <thead>
             <tr>
@@ -26,34 +26,16 @@
                     <td>${account.customerAddress}</td>
                     <td>${account.contactNumber}</td>
                     <td>
-                        <a href="/account/viewAccount/${account.accountNumber}">View</a>
-                        <a href="/account/updateAccount/${account.accountNumber}">Update</a>
-                        <a href="/account/deleteAccount/${account.accountNumber}">Delete</a>
+                        <a href="<c:url value='/account/viewAccount/${account.accountNumber}'/>">View</a>
+                        <a href="<c:url value='/account/updateAccount/${account.accountNumber}'/>">Edit</a>
+                        <a href="<c:url value='/account/deleteAccount/${account.accountNumber}'/>">Delete</a>
                     </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-
-    <h2>Create Account</h2>
-    <form action="/account/createAccount" method="post">
-        <label for="accountNumber">Account Number:</label>
-        <input type="text" id="accountNumber" name="accountNumber" required><br>
-
-        <label for="customerName">Customer Name:</label>
-        <input type="text" id="customerName" name="customerName" required><br>
-
-        <label for="customerAddress">Customer Address:</label>
-        <input type="text" id="customerAddress" name="customerAddress" required><br>
-
-        <label for="contactNumber">Contact Number:</label>
-        <input type="text" id="contactNumber" name="contactNumber" required><br>
-
-        <button type="submit">Create Account</button>
-    </form>
-
-    <h2>View Account</h2>
-    <!-- Add the form for viewing account details here -->
-    <!-- You can use the account details retrieved from the controller -->
+    
+    <br>
+    <a href="<c:url value='/account/createAccount'/>">Create New Account</a>
 </body>
 </html>

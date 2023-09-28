@@ -1,12 +1,17 @@
 package com.staragile.banking.banking;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-import java.util.Optional;
+import com.staragile.banking.banking.Account;
+import com.staragile.banking.banking.AccountService;
+
+import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
 
 @Controller
 @RequestMapping("/account")
@@ -15,16 +20,16 @@ public class MvcAccountController {
     @Autowired
     private AccountService accountService;
 
-    @GetMapping("/mvchello")
+    @RequestMapping("/mvchello")
     public String doSomething() {
         return "Hello World!!!";
     }
 
-    @GetMapping("/getAllAccounts")
+    @RequestMapping("/getAllAccounts")
     public String getAllAccounts(Model model) {
-        List<Account> accountList = accountService.getAllAccounts();
+        java.util.List<Account> accountList = accountService.getAllAccounts();
         model.addAttribute("accountList", accountList);
-        return "account"; // Return the view name (e.g., account.html)
+        return "account"; // Assuming your JSP file is named "account.jsp"
     }
 
     @PostMapping("/createAccount")
@@ -48,12 +53,12 @@ public class MvcAccountController {
     // New GET request for viewing an account by account number
     @GetMapping("/viewAccount/{accountNumber}")
     public String viewAccount(@PathVariable String accountNumber, Model model) {
-        Optional<Account> optionalAccount = accountService.getAccountByAccountNumber(accountNumber);
+        java.util.Optional<Account> optionalAccount = accountService.getAccountByAccountNumber(accountNumber);
 
         if (optionalAccount.isPresent()) {
             Account account = optionalAccount.get();
             model.addAttribute("account", account);
-            return "viewAccount"; // Return the view name (e.g., viewAccount.html)
+            return "viewAccount"; // Assuming your JSP file is named "viewAccount.jsp"
         } else {
             // Handle the case where the account is not found
             return "accountNotFound"; // You can create a separate view for this scenario
