@@ -57,4 +57,10 @@ public class AccountController {
         accountService.deleteAccount(accountNumber);
         return "Account deleted successfully!";
     }
+
+    // New GET request for viewing an account by account number
+    @GetMapping("/viewAccount/{accountNumber}")
+    public Optional<Account> viewAccount(@PathVariable String accountNumber) {
+        return accountService.getAccountByAccountNumber(accountNumber);
+    }
 }

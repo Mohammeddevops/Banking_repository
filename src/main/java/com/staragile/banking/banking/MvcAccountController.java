@@ -5,12 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
-@RequestMapping("/account") // Define a common base path for all endpoints
+@RequestMapping("/account")
 public class MvcAccountController {
 
     @Autowired
@@ -44,5 +43,20 @@ public class MvcAccountController {
     public String deleteAccount(@PathVariable String accountNumber) {
         accountService.deleteAccount(accountNumber);
         return "redirect:/account/getAllAccounts";
+    }
+
+    // New GET request for viewing an account by account number
+    @GetMapping("/viewAccount/{accountNumber}")
+    public String viewAccount(@PathVariable String accountNumber, Model model) {
+        Optional<Account> optionalAccount = accountService.getAccountByAccountNumber(accountNumber);
+
+        if (optionalAccount.isPresent()) {
+            Account account = optionalAccount.get();
+            model.addAttribute("account", account);
+            return "viewAccount"; // Return the view name (e.g., viewAccount.html)
+        } else {
+            // Handle the case where the account is not found
+            return "accountNotFound"; // You can create a separate view for this scenario
+        }
     }
 }
