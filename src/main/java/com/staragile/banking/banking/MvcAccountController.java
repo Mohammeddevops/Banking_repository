@@ -14,22 +14,28 @@ import com.staragile.banking.banking.AccountService;
 import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
 
 @Controller
-@RequestMapping("/account")
+//@RequestMapping("/account")
 public class MvcAccountController {
 
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping("/mvchello")
+    @GetMapping("/mvchello")
     public String doSomething() {
-        return "Hello World!!!";
+    	System.out.println("hello world");
+        return "hello.jsp";
     }
-
+    @GetMapping("/mvchello1")
+    public String doSomething1() {
+    	System.out.println("hello world");
+        return "hello";
+    }
     @RequestMapping("/getAllAccounts")
     public String getAllAccounts(Model model) {
+    	System.out.println("get all account");
         java.util.List<Account> accountList = accountService.getAllAccounts();
         model.addAttribute("accountList", accountList);
-        return "account"; // Assuming your JSP file is named "account.jsp"
+        return "banking"; // Assuming your JSP file is named "account.jsp"
     }
 
     @PostMapping("/createAccount")

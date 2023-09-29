@@ -42,7 +42,9 @@ public class AccountController {
 
     @PostMapping("/createAccount")
     public String createAccount(@RequestBody Account account) {
+    	System.out.println(account.getAccountNumber()+","+account.getContactNumber()+","+account.getCustomerAddress()+","+account.getCustomerName());
         accountService.addAccount(account);
+       
         return "Account created successfully!";
     }
 
